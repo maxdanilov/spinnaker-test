@@ -1,0 +1,38 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: maxim-test-stage
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maxim-test-stage
+  namespace: maxim-test-stage
+  labels:
+    app: maxim-test-stage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maxim-test-stage
+  template:
+    metadata:
+      labels:
+        app: maxim-test-stage
+    spec:
+      containers:
+      - name: nginx-maxim-test-stage
+        image: nginx:1.17
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http
+        resources:
+          requests:
+            cpu: 500m
+            memory: "512Mi"
+          limits:
+            cpu: 500m
+            memory: "512Mi"
